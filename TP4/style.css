@@ -1,0 +1,72 @@
+@media (min-width: 401px) {
+  body {
+    background-color: rgb(40, 60, 80);
+  }
+}
+
+/* 2. Centrar h1 cuando ancho < 800px */
+@media (max-width: 799px) {
+  h1 {
+    text-align: center;
+  }
+}
+
+/* 3. Max-width del article cuando pantalla esté en orientación horizontal */
+@media (orientation: landscape) {
+  article {
+    max-width: 50ch;
+  }
+}
+
+/* 4. Cambiar fondo del h1 si alto mínimo es 200px */
+@media (min-height: 200px) {
+  h1 {
+    background-color: #234; /* podés personalizar el color si querés */
+  }
+}
+
+/* 5. Cambiar a fuente serif al imprimir */
+@media print {
+  p {
+    font-family: serif;
+  }
+}
+
+/* 6. Preferencia de esquema de color claro */
+@media (prefers-color-scheme: light) {
+  body, h1 {
+    color: #111;
+    background-color: #DDD;
+  }
+}
+
+/* 7. Sin hover: links con fondo y padding */
+@media screen and (hover: none) {
+  a {
+    background-color: #212;
+    padding: 2px 5px;
+    display: inline-block;
+  }
+}
+
+/* 8. Entre 800 y 899px: ocultar imagen */
+@media screen and (min-width: 800px) and (max-width: 899px) {
+  img {
+    display: none;
+  }
+}
+
+/* 9. Ancho entre 200 y 400px: imagen con alto fijo y object-fit */
+@media screen and (min-width: 200px) and (max-width: 400px) {
+  img {
+    height: 400px;
+    object-fit: cover;
+  }
+}
+
+/* 10. Device Pixel Ratio mayor a 2 */
+@media (min-resolution: 2dppx) {
+  article {
+    background-color: #667;
+  }
+}

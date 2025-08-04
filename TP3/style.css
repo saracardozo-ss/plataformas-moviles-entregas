@@ -1,0 +1,50 @@
+body 
+{
+			font-size: 18px;
+			background-color: #ffe;
+			color: #210;
+		}
+
+		#contenedor {
+			max-width: 40ch;
+			margin: 2rem auto;
+			padding: 1rem;
+		}
+
+		h1 {
+			font-size: 2rem;
+			text-align: left;
+            text-align: center
+		}
+
+		p {
+		    font-family: serif;
+		}
+
+		#primer-parrafo {
+			font-size: 1.3rem;
+			background-color: #CEE;
+		}
+
+		p.importante em {
+			font-weight: bold;
+			color: #933;
+		}
+
+		p.novelas a {
+			outline: none;
+			text-decoration: none;
+		}
+		p.novelas a:hover {
+			text-decoration: underline;
+			background-color: #ccd;
+            text-shadow: none;
+		}
+
+		body p.fuente.parrafo {
+			font-size: 0.9rem;
+			opacity: 100%;
+			text-align: center;
+            outline: 1px solid #333;
+            text-shadow: none;
+		}

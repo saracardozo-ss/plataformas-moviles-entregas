@@ -1,0 +1,68 @@
+body {
+    background-color: #222;
+    color: #ee6;
+    font-family: sans-serif;
+}
+
+h1 {
+    text-align: center;
+    transition: color 0.3s;
+}
+
+h1:hover {
+    color: #fff; /* Cambia de color al pasar el puntero */
+}
+
+h2, h3 {
+    color: #eee;
+    text-transform: uppercase; /* Títulos en mayúscula */
+}
+
+p:first-line {
+    color: #efe; /* Primera línea del primer párrafo */
+}
+
+strong {
+    border-bottom: 1px solid white; /* Borde inferior blanco */
+}
+
+.the-force {
+    background-color: #444;
+    font-weight: bold; /* Texto en negrita */
+}
+
+.light-side {
+    color: #66f; /* Color para la clase light-side */
+}
+
+.dark-side {
+    color: #f33; /* Color para la clase dark-side */
+}
+
+#og-trilogy {
+    list-style-type: circle; /* Estilo de lista */
+}
+
+.movies-list:nth-child(odd) {
+    background-color: #111; /* Fondo alternado */
+}
+
+.movies-list:nth-child(even) {
+    background-color: #333; /* Fondo alternado */
+}
+
+.movies-list {
+    padding-left: 20px; /* Padding para el segundo listado */
+}
+
+.movies-list li:last-child {
+    margin-top: 20px; /* Margin para el último elemento del tercer listado */
+}
+
+a:visited {
+    color: gray; /* Color gris para enlaces visitados */
+}
+
+a:not([href]) {
+    font-style: italic; /* Cursiva para enlaces sin href */
+}
