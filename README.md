@@ -1,1 +1,0 @@
-# plataformas-moviles-entregas
