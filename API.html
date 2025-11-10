@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agenda</title>
+  <style>
+    body { 
+      font-family: "Segoe UI", sans-serif;
+      background: #f7f8fa;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 30px;
+    }
+
+    h1 { 
+      color: #f55555;
+      text-shadow: 1px 1px 3px #ffb3b3;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .contenedor { 
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 25px;
+      width: 100%;
+      max-width: 1200px;
+    }
+
+    .agenda {
+      background: rgb(233, 151, 151);
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgb(243, 6, 6);
+      width: 350px;
+      text-align: center;
+    }
+
+    input, button, select { 
+      margin: 10px 0;
+      padding: 10px;
+      width: 90%;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 15px;
+    }
+
+    button {   
+      background-color: #eb6363;
+      color: white;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      transition: 0.2s;
+    }                             
+
+    button:hover {
+      background-color: #d83a3a;
+    }
+
+    ul {  
+      list-style: none;
+      padding: 0;
+      margin-top: 10px;
+      text-align: left;
+    }
+
+    li { 
+      background: #fff;
+      padding: 8px;
+      margin: 5px 0;
+      border-radius: 5px;
+      box-shadow: 0 0 3px #ccc;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .btn-eliminar { 
+      background: #ff5c5c;
+      border: none;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+      padding: 3px 7px;
+    }
+
+    .btn-eliminar:hover {
+      background: #c82333;
+    }
+
+    .tarjetas {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 15px;
+      max-width: 400px;
+    }
+
+    .holiday-card { 
+      background: #fabfd8;
+      color: #852239;
+      border: 1px solid #be055c;
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 0 0 5px #ffbcd1;
+      width: 100%;
+      transition: transform 0.2s ease;
+    }
+
+    .holiday-card:hover {
+      transform: translateY(-3px);
+    }
+
+    .lista-feriados {
+      margin-top: 20px;
+      background: #fff;
+      border-radius: 10px;
+      padding: 10px;
+      box-shadow: 0 0 5px #ccc;
+      text-align: left;
+    }
+
+    @media (max-width: 768px) { 
+      .contenedor {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .agenda, .tarjetas {
+        width: 90%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Mi Agenda</h1>
+
+  <div class="contenedor">
+    <div class="agenda">
+      <select id="pais" onchange="cambiarPais()">   
+        <option value="AR">Argentina</option>
+        <option value="BR">Brasil</option>
+        <option value="CL">Chile</option>
+        <option value="UY">Uruguay</option>
+        <option value="PY">Paraguay</option>
+      </select>
+
+      <input type="date" id="fecha"> 
+      <input type="text" id="evento" placeholder="Agenda algo importante"> 
+      <button onclick="agregarEvento()">Agregar</button> 
+
+      <ul id="lista"></ul> 
+
+      <div class="lista-feriados">
+        <h3>Próximos feriados</h3>
+        <ul id="listaFeriados"></ul>
+      </div> 
+    </div>
+
+    <div class="tarjetas" id="tarjetas"></div>
+  </div>
+
+  <script> 
+    const lista = document.getElementById("lista");
+    const tarjetas = document.getElementById("tarjetas");
+    const listaFeriados = document.getElementById("listaFeriados");
+    const selectPais = document.getElementById("pais");
+
+    const anioActual = new Date().getFullYear();
+    let feriados = [];
+    let eventos = JSON.parse(localStorage.getItem("eventos")) || []; 
+
+    
+    async function cargarFeriados(codigoPais) {
+      try {
+        const res = await fetch(`https://date.nager.at/api/v3/PublicHolidays/${anioActual}/${codigoPais}`);
+        feriados = await res.json();
+        mostrarProximosFeriados(codigoPais);
+      } catch (error) {
+        console.error("Error al cargar los feriados:", error);
+      }
+    }
+
+    async function mostrarProximosFeriados(codigoPais) {
+      listaFeriados.innerHTML = "<li>Cargando...</li>";
+      try {
+        const res = await fetch(`https://date.nager.at/api/v3/NextPublicHolidays/${codigoPais}`);
+        const proximos = await res.json();
+        listaFeriados.innerHTML = "";
+        proximos.slice(0, 5).forEach(f => {
+          const li = document.createElement("li");
+          li.textContent = `${f.date}: ${f.localName}`;
+          listaFeriados.appendChild(li);
+        });
+      } catch {
+        listaFeriados.innerHTML = "<li>Error al cargar feriados</li>";
+      }
+    }
+
+    
+    function crearTarjeta(titulo, descripcion, id) {
+      const card = document.createElement("div");
+      card.className = "holiday-card";
+      card.id = "card-" + id;
+      card.innerHTML = `
+        <strong>${titulo}</strong><br>${descripcion}
+      `;
+      tarjetas.appendChild(card);
+    }
+
+  
+    async function agregarEvento() {
+      const fecha = document.getElementById("fecha").value;
+      const evento = document.getElementById("evento").value.trim();
+
+      if (!fecha || !evento) {
+        alert("Completá ambos campos");
+        return;
+      }
+
+      const id = Date.now();
+      const item = document.createElement("li");
+      item.id = "item-" + id;
+      item.innerHTML = `${fecha}: ${evento} <button class="btn-eliminar" onclick="eliminarEvento(${id})">Eliminiar</button>`;
+      lista.appendChild(item);
+      eventos.push({ id, fecha, evento, pais: selectPais.value });
+      localStorage.setItem("eventos", JSON.stringify(eventos));
+      const feriado = feriados.find(f => f.date === fecha);
+      if (feriado) {
+        crearTarjeta(`🎉 ${feriado.localName}`, `${feriado.name}<br>📍 ${selectPais.options[selectPais.selectedIndex].text}`, id);
+      } else {
+        crearTarjeta("📌 Evento agendado", `Fecha: ${fecha}<br>${evento}`, id);
+      }
+
+      mostrarFeriadosCercanos(fecha);
+      document.getElementById("evento").value = "";
+    }
+
+    async function mostrarFeriadosCercanos(fechaSeleccionada) {
+      const res = await fetch("https://date.nager.at/api/v3/NextPublicHolidaysWorldwide");
+      const feriadosMundiales = await res.json();
+
+      const fechaUser = new Date(fechaSeleccionada);
+      feriadosMundiales.forEach(f => {
+        const fechaF = new Date(f.date);
+        const diff = Math.abs(fechaF - fechaUser) / (1000 * 60 * 60 * 24);
+        if (diff <= 3) {
+          crearTarjeta(` ${f.countryCode} - ${f.localName}`, `Feriado mundial cercano (${f.date})`, f.date + f.countryCode);
+        }
+      });
+    }
+
+    function eliminarEvento(id) {
+      document.getElementById("item-" + id)?.remove();
+      document.getElementById("card-" + id)?.remove();
+      eventos = eventos.filter(e => e.id !== id);
+      localStorage.setItem("eventos", JSON.stringify(eventos));
+    }
+
+    function cargarEventosGuardados() {
+      eventos.forEach(e => {
+        const item = document.createElement("li");
+        item.id = "item-" + e.id;
+        item.innerHTML = `${e.fecha}: ${e.evento} <button class="btn-eliminar" onclick="eliminarEvento(${e.id})">X</button>`;
+        lista.appendChild(item);
+        crearTarjeta("📌 Evento agendado", `Fecha: ${e.fecha}<br>${e.evento}`, e.id);
+      });
+    }
+
+    function cambiarPais() {
+      tarjetas.innerHTML = "";
+      cargarFeriados(selectPais.value);
+    }
+
+    cargarFeriados("AR");
+    cargarEventosGuardados();
+  </script>
+</body>
+</html>
