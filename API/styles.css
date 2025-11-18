@@ -1,0 +1,132 @@
+body { 
+  font-family: "Segoe UI", sans-serif;
+  background: #f7f8fa;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px;
+}
+
+h1 { 
+  color: #f55555;
+  text-shadow: 1px 1px 3px #ffb3b3;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.contenedor { 
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 25px;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.agenda {
+  background: rgb(233, 151, 151);
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgb(243, 6, 6);
+  width: 350px;
+  text-align: center;
+}
+
+input, button, select { 
+  margin: 10px 0;
+  padding: 10px;
+  width: 90%;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 15px;
+}
+
+button {   
+  background-color: #eb6363;
+  color: white;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  transition: 0.2s;
+}                             
+
+button:hover {
+  background-color: #d83a3a;
+}
+
+ul {  
+  list-style: none;
+  padding: 0;
+  margin-top: 10px;
+  text-align: left;
+}
+
+li { 
+  background: #fff;
+  padding: 8px;
+  margin: 5px 0;
+  border-radius: 5px;
+  box-shadow: 0 0 3px #ccc;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn-eliminar { 
+  background: #ff5c5c;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 3px 7px;
+}
+
+.btn-eliminar:hover {
+  background: #c82333;
+}
+
+.tarjetas {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 15px;
+  max-width: 400px;
+}
+
+.holiday-card { 
+  background: #fabfd8;
+  color: #852239;
+  border: 1px solid #be055c;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 0 5px #ffbcd1;
+  width: 100%;
+  transition: transform 0.2s ease;
+}
+
+.holiday-card:hover {
+  transform: translateY(-3px);
+}
+
+.lista-feriados {
+  margin-top: 20px;
+  background: #fff;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 0 5px #ccc;
+  text-align: left;
+}
+
+@media (max-width: 768px) { 
+  .contenedor {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .agenda, .tarjetas {
+    width: 90%;
+  }
+}

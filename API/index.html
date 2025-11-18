@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agenda</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>Mi Agenda</h1>
+
+  <div class="contenedor">
+    <div class="agenda">
+      <select id="pais" onchange="cambiarPais()">
+        <option value="">Cargando países...</option>
+      </select>
+
+      <input type="date" id="fecha"> 
+      <input type="text" id="evento" placeholder="Agenda algo importante"> 
+      <button onclick="agregarEvento()">Agregar</button> 
+
+      <ul id="lista"></ul> 
+
+      <div class="lista-feriados">
+        <h3>Próximos feriados</h3>
+        <ul id="listaFeriados"></ul>
+      </div> 
+    </div>
+
+    <div class="tarjetas" id="tarjetas"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
