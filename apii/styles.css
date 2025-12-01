@@ -1,0 +1,78 @@
+body { 
+  font-family: "Segoe UI", sans-serif;
+  background: #fdeef4;
+  color: #444;
+  padding: 20px;
+}
+
+h1 { 
+  color: #ff8fb6;             
+  text-shadow: 1px 1px 3px #ffd4e5;
+  font-weight: bold;
+}
+
+.col-md-4 {
+  background: #ffd9e8;         
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 0 10px #ffbcd4;
+}
+
+.form-control,
+.form-select {
+  border: 1px solid #ffbcd4;
+  background: #fff;
+  border-radius: 8px;
+}
+
+.btn-primary {
+  background-color: #ff9ec9 !important;
+  border: none !important;
+  font-weight: bold;
+  box-shadow: 0 0 5px #ffbcd4;
+}
+
+.btn-primary:hover {
+  background-color: #ff87bc !important;
+}
+
+.list-group-item {
+  background: #fff;
+  border: 1px solid #ffd4e5;
+  margin-bottom: 5px;
+  border-radius: 8px !important;
+}
+
+.btn-eliminar { 
+  background: #ff6b8f;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 3px 7px;
+}
+
+.btn-eliminar:hover {
+  background: #e6456f;
+}
+
+.holiday-card { 
+  background: #ffe5ef;
+  color: #a83a5e;
+  border: 1px solid #ffbcd4;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 0 8px #ffc9dd;
+  transition: transform 0.2s ease;
+}
+
+.holiday-card:hover {
+  transform: translateY(-3px);
+}
+
+@media (max-width: 768px) { 
+  .col-md-4 {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+}
